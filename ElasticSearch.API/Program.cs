@@ -1,5 +1,7 @@
 using ElasticSearch.API.Extentions;
+using ElasticSearch.API.Models;
 using ElasticSearch.API.Services;
+using ElasticSearch.API.Services.Interfaces;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
@@ -20,6 +22,7 @@ ConfigureLogging();
 builder.Host.UseSerilog();
 
 builder.Services.AddSingleton<ProductService>();
+builder.Services.AddTransient<IElasticSearchEngine<Product>, ElasticSearchProductEngine>();
 
 var app = builder.Build();
 
